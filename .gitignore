@@ -1,0 +1,23 @@
+# sbt
+target/
+project/target/
+project/project/
+
+# IDE
+.idea/
+.bsp/
+.metals/
+.bloop/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Scala
+*.class
+*.log
+
+# Claude Code
+.claude/
+*.tasty
