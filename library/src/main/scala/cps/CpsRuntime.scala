@@ -27,8 +27,16 @@ trait CpsMonad[F[_]]:
   def map[A, B](fa: F[A])(f: A => B): F[B] =
     flatMap(fa)(a => pure(f(a)))
 
-  def apply[T]( op: Context ?=> T): F[T]
-  
+  /** Create a fresh context for this monad */
+  def createContext(): Context
+
+  /** Apply operation with given context - capability flows through parameter */
+  def applyWithContext[T](ctx: Context)(op: Context => T): F[T]
+
+  /** Apply operation - creates context and delegates to applyWithContext */
+  def apply[T](op: Context ?=> T): F[T] =
+    applyWithContext(createContext())(ctx => op(using ctx))
+
 end CpsMonad
 
 object CpsMonad:

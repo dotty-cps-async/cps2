@@ -29,7 +29,7 @@ import language.experimental.captureChecking
  *       ${ DurablePreprocessorMacro.impl[A]('body, 'ctx) }
  * }}}
  */
-trait CpsPreprocessor[F[_], C]:
+trait CpsPreprocessor[F[_], C <: CpsMonadContext[F]]:
 
   /**
    * Preprocess the async block body before CPS transformation.
